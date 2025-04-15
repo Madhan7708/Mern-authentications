@@ -1,9 +1,21 @@
 const RegisterSchema = require("../models/UserModel");
 const nodemailer=require('nodemailer');
 const bcrypt = require("bcryptjs");
+const generateToken=require('../utils/index');
+const  mailtransport=nodemailer.createTransport({
+  service:"gmail",
+  host: "smtp.gmail.com",
+  port: 465,              // Secure SSL port
+  secure: true,
+  auth:{
+    user:"testingwebtech07@gmail.com",
+    pass:"hafzdrsvasgxidqt"
+  }
+})
 
 const createUser = async (req, res) => {
   const { Name, EmailId, Phoneno, Password } = req.body;
+  console.log(Password);
   try {
     const checkmail = await RegisterSchema.findOne({ email: EmailId });
     if (checkmail) {
@@ -18,18 +30,6 @@ const createUser = async (req, res) => {
       password: HashPassword,
     });
     console.log(Register);
-
-    const  mailtransport=nodemailer.createTransport({
-      service:"gmail",
-      host: "smtp.gmail.com",
-      port: 465,              // Secure SSL port
-      secure: true,
-      auth:{
-        user:"testingwebtech07@gmail.com",
-        pass:"hafzdrsvasgxidqt"
-      }
-    })
-
     const mailoption={
       from:"testingwebtech07@gmail.com",
       to:EmailId,
@@ -51,4 +51,41 @@ const createUser = async (req, res) => {
   }
 };
 
-module.exports = { createUser };
+const loginUser=async(req,res)=>{
+  const {EmailId,Password}=req.body;
+  try{
+    const User=await RegisterSchema.findOne({email:EmailId});
+    if(!User){
+      return res.status(201).json({message:"User not found"});
+    }
+
+    const password=await bcrypt.compare(Password,User.password);
+    if(!password){
+      return res.status(201).json({message:"Password not match"});
+    }
+
+    const token =await generateToken(User);
+    console.log(token);
+    const mailoption={
+      from:"testingwebtech07@gmail.com",
+      to:EmailId,
+      subject:" Testing Team Login Success",
+      text:"Your are logined into our Account. Welcome to our platform!"
+    }
+
+    mailtransport.sendMail(mailoption,(err,info)=>{
+      if(err){
+        console.log(err);
+      }
+      else{
+        console.log("Mail send success");
+      }
+    })
+
+    return res.status(200).json({message:"login success",token});
+  }
+  catch(err){
+    console.log(err);
+  }
+}
+module.exports = { createUser,loginUser};

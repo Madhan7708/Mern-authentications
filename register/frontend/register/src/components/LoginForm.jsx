@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
+import axios from "axios";
 
 
 const LoginForm = () => {
@@ -18,7 +19,23 @@ const LoginForm = () => {
   }
   function handlesubmit(e){
     e.preventDefault();
-    console.log(formData);
+    axios.post("http://localhost:7000/task/login",formData)
+    .then((res)=>{
+      if(res.data.status===200){
+        alert(res.data.message);
+      }
+      else{
+        alert(res.data.message);
+      }
+      setFormData({
+        EmailId:"",
+        Password:"",
+      })
+
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
   }
   return (
     
@@ -39,6 +56,7 @@ const LoginForm = () => {
           <input
             type="text"
             name="EmailId"
+            value={formData.EmailId}
             className="form-control"
             placeholder="Email Id"
             onChange={handlechange}
@@ -48,6 +66,7 @@ const LoginForm = () => {
           <input
             type="password"
             name="Password"
+            value={formData.Password}
             className="form-control"
             placeholder="Password"
             onChange={handlechange}
