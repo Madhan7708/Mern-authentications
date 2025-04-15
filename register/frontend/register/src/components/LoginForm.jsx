@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import axios from "axios";
 
-
+import { useNavigate } from "react-router-dom";
 const LoginForm = () => {
+  const nav=useNavigate();
 
   const [formData,setFormData]=useState({
     EmailId:"",
@@ -21,8 +22,12 @@ const LoginForm = () => {
     e.preventDefault();
     axios.post("http://localhost:7000/task/login",formData)
     .then((res)=>{
-      if(res.data.status===200){
+      if(res.status==200){
+        const token=res.data.token;
+        localStorage.setItem("token",token);
+        console.log(token);
         alert(res.data.message);
+        nav('/home')
       }
       else{
         alert(res.data.message);

@@ -65,22 +65,22 @@ const loginUser=async(req,res)=>{
     }
 
     const token =await generateToken(User);
-    console.log(token);
-    const mailoption={
-      from:"testingwebtech07@gmail.com",
-      to:EmailId,
-      subject:" Testing Team Login Success",
-      text:"Your are logined into our Account. Welcome to our platform!"
-    }
+    // console.log(token);
+    // const mailoption={
+    //   from:"testingwebtech07@gmail.com",
+    //   to:EmailId,
+    //   subject:" Testing Team Login Success",
+    //   text:"Your are logined into our Account. Welcome to our platform!"
+    // }
 
-    mailtransport.sendMail(mailoption,(err,info)=>{
-      if(err){
-        console.log(err);
-      }
-      else{
-        console.log("Mail send success");
-      }
-    })
+    // mailtransport.sendMail(mailoption,(err,info)=>{
+    //   if(err){
+    //     console.log(err);
+    //   }
+    //   else{
+    //     console.log("Mail send success");
+    //   }
+    // })
 
     return res.status(200).json({message:"login success",token});
   }
