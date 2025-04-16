@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import axios from "axios";
-
+import UserContext from "../Usercontext";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 const LoginForm = () => {
   const nav=useNavigate();
+  const { setUserEmail } = useContext(UserContext)
 
   const [formData,setFormData]=useState({
     EmailId:"",
@@ -26,6 +28,7 @@ const LoginForm = () => {
         const token=res.data.token;
         localStorage.setItem("token",token);
         console.log(token);
+        setUserEmail(formData.EmailId)
         alert(res.data.message);
         nav('/home')
       }

@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
-
+import { useContext } from "react";
+import UserContext from "../Usercontext";
 function Home() {
     const nav = useNavigate();
+    const { userEmail } = useContext(UserContext);
 
     function logout() {
         localStorage.removeItem('token');
@@ -18,11 +20,11 @@ function Home() {
                     </button>
                 </div>
                 <div className="card-body">
-                    <h5 className="card-title">Welcome to the Home Page!</h5>
+                    <h5 className="card-title">Welcome to the Home Page! {userEmail}</h5>
                     <p className="card-text">
                         This is your dashboard. You can manage your account, check updates, and perform various actions here.
                     </p>
-                    {/* Add more dashboard sections/cards here as needed */}
+                  
                 </div>
             </div>
         </div>
