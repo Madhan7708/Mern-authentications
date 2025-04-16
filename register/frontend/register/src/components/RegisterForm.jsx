@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import toastr from 'toastr';
+import 'toastr/build/toastr.min.css';
 const RegisterForm = () => {
 
   const [user,setUser]=useState({
@@ -20,12 +22,16 @@ const RegisterForm = () => {
 
   function handlesubmit(e){
     e.preventDefault();
-    
     console.log(user);
     axios.post("http://localhost:7000/task/register/",user)
     .then((res)=>{
       console.log(res.data);
-      alert(res.data.message);
+      if(res.status==201){
+        toastr.error(res.data.message);
+      }
+      else{
+      toastr.success(res.data.message);
+      }
       setUser({
         Name:"",
         EmailId:"",

@@ -4,6 +4,8 @@ import axios from "axios";
 import UserContext from "../Usercontext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import toastr from 'toastr';
+import 'toastr/build/toastr.min.css';
 const LoginForm = () => {
   const nav=useNavigate();
   const { setUserEmail } = useContext(UserContext)
@@ -29,11 +31,11 @@ const LoginForm = () => {
         localStorage.setItem("token",token);
         console.log(token);
         setUserEmail(formData.EmailId)
-        alert(res.data.message);
+        toastr.success(res.data.message);
         nav('/home')
       }
       else{
-        alert(res.data.message);
+        toastr.error(res.data.message);
       }
       setFormData({
         EmailId:"",
