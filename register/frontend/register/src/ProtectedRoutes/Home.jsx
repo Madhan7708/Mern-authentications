@@ -3,11 +3,12 @@ import { useContext } from "react";
 import UserContext from "../Usercontext";
 function Home() {
     const nav = useNavigate();
-    const { userEmail } = useContext(UserContext);
+    const { userEmail, setUserEmail } = useContext(UserContext);
 
     function logout() {
         localStorage.removeItem('token');
-        nav('/');
+        setUserEmail("")
+                nav('/');
     }
 
     return (
