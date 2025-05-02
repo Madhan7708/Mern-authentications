@@ -90,7 +90,7 @@ const LoginForm = () => {
         Don't have an account?{" "}
         <Link
           to="/Register"
-          className="btn btn-link p-0 text-decoration-none"
+          className="btn btn-link p-0 text-decoration-none mb-2 ps-5"
           style={{ color: "#ffd700", fontWeight: "bold" }}
         >
           Register Here

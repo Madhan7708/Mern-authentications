@@ -78,7 +78,7 @@ const RegisterForm = () => {
       </form>
       <p className="text-center mt-3">
         Already have an account? 
-        <Link to="/" className="btn btn-link p-0 text-decoration-none" style={{ color: "#ffd700", fontWeight: "bold" }} >
+        <Link to="/" className="btn btn-link p-0 text-decoration-none mb-2 ps-5" style={{ color: "#ffd700", fontWeight: "bold" }} >
           Login Here
         </Link>
       </p>
