@@ -8,7 +8,7 @@ const generateToken=(user)=>{
         phone: user.phoneno
       };
     // return jwt.sign({id:user._id},process.env.SECRETKEY,{expiresIn:"5mins"})   // to give only id
-    return jwt.sign(payload,process.env.SECRETKEY,{expiresIn:"2mins"})
+    return jwt.sign(payload,process.env.SECRETKEY,{expiresIn:"10mins"})
 }
 
 module.exports=generateToken;
