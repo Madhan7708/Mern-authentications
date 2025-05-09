@@ -32,15 +32,18 @@ npm install
 cd ../client
 npm install
 
+Connection Strings
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret_key
 MAIL_USER=your_email@example.com
 MAIL_PASS=your_email_password
 CLIENT_URL=http://localhost:3000
+
 Frontend
 cd server
 npm run dev
+
 Backend
 cd ../client
-npm start
+npm run dev
 
