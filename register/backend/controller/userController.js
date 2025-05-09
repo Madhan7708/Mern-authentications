@@ -9,8 +9,8 @@ const  mailtransport=nodemailer.createTransport({
   port: 465,              // Secure SSL port
   secure: true,
   auth:{
-    user:"testingwebtech07@gmail.com",
-    pass:"hafzdrsvasgxidqt"
+    user:"",
+    pass:""
   }
 })
 
