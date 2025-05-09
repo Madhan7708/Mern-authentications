@@ -29,7 +29,7 @@ Before you begin, ensure you have met the following requirements:
 3. Run the following command:
 
    ```bash
-   https://github.com/Mdhan7708/Mern-authentications.git
+   https://github.com/Madhan7708/Mern-authentications.git
 4.  Navigate to the directory where you want to clone the repository.
 5.  And open the folder
 
